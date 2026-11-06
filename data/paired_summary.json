@@ -1,0 +1,782 @@
+{
+  "modelVersion": "1.3.0",
+  "design": {
+    "pairedSeeds": true,
+    "nPerRegime": 20,
+    "seeds": [
+      500000,
+      507919,
+      515838,
+      523757,
+      531676,
+      539595,
+      547514,
+      555433,
+      563352,
+      571271,
+      579190,
+      587109,
+      595028,
+      602947,
+      610866,
+      618785,
+      626704,
+      634623,
+      642542,
+      650461
+    ],
+    "metrics": [
+      "mcFrac",
+      "meanAdh",
+      "maxCluster",
+      "meanCoop",
+      "somaFrac"
+    ],
+    "bootstrapResamples": 10000,
+    "permutationResamples": 100000,
+    "primaryEndpoint": "mcFrac",
+    "primaryComparison": "group - control",
+    "alpha": 0.05
+  },
+  "comparisons": {
+    "group-control": {
+      "label": "Grup seçilimi − Kontrol",
+      "role": "primary",
+      "metrics": {
+        "mcFrac": {
+          "n": 20,
+          "meanDifference": 0.52279795,
+          "medianDifference": 0.525596,
+          "sdDifference": 0.029325121345780265,
+          "minDifference": 0.44982199999999994,
+          "maxDifference": 0.567794,
+          "positive": 20,
+          "negative": 0,
+          "zero": 0,
+          "cohenDz": 17.827648309978024,
+          "medianDifferenceCI95": [
+            0.5111695,
+            0.5404935
+          ],
+          "pValue": 1.9073486328125e-06,
+          "permutations": 1048576,
+          "probabilityOfSuperiority": 1.0,
+          "endpointRole": "birincil"
+        },
+        "meanAdh": {
+          "n": 20,
+          "meanDifference": 0.07698695,
+          "medianDifference": 0.077413,
+          "sdDifference": 0.006274633346176289,
+          "minDifference": 0.06919700000000001,
+          "maxDifference": 0.09345200000000001,
+          "positive": 20,
+          "negative": 0,
+          "zero": 0,
+          "cohenDz": 12.269553574300119,
+          "medianDifferenceCI95": [
+            0.0731585,
+            0.07878199999999999
+          ],
+          "pValue": 1.999980000199998e-05,
+          "permutations": 100000,
+          "probabilityOfSuperiority": 1.0,
+          "endpointRole": "ikincil"
+        },
+        "maxCluster": {
+          "n": 20,
+          "meanDifference": 54.0,
+          "medianDifference": 53.0,
+          "sdDifference": 8.789946410231227,
+          "minDifference": 40.0,
+          "maxDifference": 70.0,
+          "positive": 20,
+          "negative": 0,
+          "zero": 0,
+          "cohenDz": 6.143382164098937,
+          "medianDifferenceCI95": [
+            49.0,
+            59.0
+          ],
+          "pValue": 9.99990000099999e-06,
+          "permutations": 100000,
+          "probabilityOfSuperiority": 1.0,
+          "endpointRole": "ikincil"
+        },
+        "meanCoop": {
+          "n": 20,
+          "meanDifference": 0.007196600000000009,
+          "medianDifference": 0.007405500000000009,
+          "sdDifference": 0.00642027193554258,
+          "minDifference": -0.001984999999999959,
+          "maxDifference": 0.020973999999999993,
+          "positive": 17,
+          "negative": 3,
+          "zero": 0,
+          "cohenDz": 1.1209182527237953,
+          "medianDifferenceCI95": [
+            0.003412499999999985,
+            0.009047500000000014
+          ],
+          "pValue": 4.999950000499995e-05,
+          "permutations": 100000,
+          "probabilityOfSuperiority": 0.85,
+          "endpointRole": "ikincil"
+        },
+        "somaFrac": {
+          "n": 20,
+          "meanDifference": 0.0007407,
+          "medianDifference": 0.0005369999999999999,
+          "sdDifference": 0.0006693259846175185,
+          "minDifference": 5.299999999999999e-05,
+          "maxDifference": 0.002098,
+          "positive": 20,
+          "negative": 0,
+          "zero": 0,
+          "cohenDz": 1.1066356559028074,
+          "medianDifferenceCI95": [
+            0.00038750000000000004,
+            0.00081
+          ],
+          "pValue": 9.99990000099999e-06,
+          "permutations": 100000,
+          "probabilityOfSuperiority": 1.0,
+          "endpointRole": "ikincil"
+        }
+      }
+    },
+    "predation-control": {
+      "label": "Güçlü baskı − Kontrol",
+      "role": "exploratory",
+      "metrics": {
+        "mcFrac": {
+          "n": 20,
+          "meanDifference": 0.51748575,
+          "medianDifference": 0.5204655,
+          "sdDifference": 0.02664387258259146,
+          "minDifference": 0.43628599999999995,
+          "maxDifference": 0.55348,
+          "positive": 20,
+          "negative": 0,
+          "zero": 0,
+          "cohenDz": 19.422317397588596,
+          "medianDifferenceCI95": [
+            0.5063305,
+            0.5280505
+          ],
+          "pValue": 9.99990000099999e-06,
+          "permutations": 100000,
+          "probabilityOfSuperiority": 1.0,
+          "endpointRole": "keşifsel"
+        },
+        "meanAdh": {
+          "n": 20,
+          "meanDifference": 0.08113785,
+          "medianDifference": 0.08023699999999999,
+          "sdDifference": 0.0063346097979358855,
+          "minDifference": 0.06822899999999998,
+          "maxDifference": 0.09384699999999999,
+          "positive": 20,
+          "negative": 0,
+          "zero": 0,
+          "cohenDz": 12.808657926560612,
+          "medianDifferenceCI95": [
+            0.0783555,
+            0.08244349999999999
+          ],
+          "pValue": 9.99990000099999e-06,
+          "permutations": 100000,
+          "probabilityOfSuperiority": 1.0,
+          "endpointRole": "keşifsel"
+        },
+        "maxCluster": {
+          "n": 20,
+          "meanDifference": 55.7,
+          "medianDifference": 56.0,
+          "sdDifference": 10.911606567996156,
+          "minDifference": 41.0,
+          "maxDifference": 77.0,
+          "positive": 20,
+          "negative": 0,
+          "zero": 0,
+          "cohenDz": 5.104656189068311,
+          "medianDifferenceCI95": [
+            47.0,
+            61.5
+          ],
+          "pValue": 9.99990000099999e-06,
+          "permutations": 100000,
+          "probabilityOfSuperiority": 1.0,
+          "endpointRole": "keşifsel"
+        },
+        "meanCoop": {
+          "n": 20,
+          "meanDifference": 0.00824695,
+          "medianDifference": 0.0076465000000000005,
+          "sdDifference": 0.007426003320303445,
+          "minDifference": -0.005375999999999992,
+          "maxDifference": 0.024376999999999982,
+          "positive": 17,
+          "negative": 3,
+          "zero": 0,
+          "cohenDz": 1.1105502710256003,
+          "medianDifferenceCI95": [
+            0.004556499999999991,
+            0.01196999999999998
+          ],
+          "pValue": 0.00013999860001399987,
+          "permutations": 100000,
+          "probabilityOfSuperiority": 0.85,
+          "endpointRole": "keşifsel"
+        },
+        "somaFrac": {
+          "n": 20,
+          "meanDifference": 0.00154605,
+          "medianDifference": 0.001575,
+          "sdDifference": 0.0008494310464255347,
+          "minDifference": -1.7000000000000088e-05,
+          "maxDifference": 0.003838,
+          "positive": 19,
+          "negative": 1,
+          "zero": 0,
+          "cohenDz": 1.8201006503186887,
+          "medianDifferenceCI95": [
+            0.0013930000000000001,
+            0.0018335
+          ],
+          "pValue": 9.99990000099999e-06,
+          "permutations": 100000,
+          "probabilityOfSuperiority": 0.95,
+          "endpointRole": "keşifsel"
+        }
+      }
+    },
+    "mutation-control": {
+      "label": "Yüksek mutasyon − Kontrol",
+      "role": "exploratory",
+      "metrics": {
+        "mcFrac": {
+          "n": 20,
+          "meanDifference": 0.44410499999999997,
+          "medianDifference": 0.44330300000000006,
+          "sdDifference": 0.027441796722671434,
+          "minDifference": 0.383097,
+          "maxDifference": 0.49570800000000004,
+          "positive": 20,
+          "negative": 0,
+          "zero": 0,
+          "cohenDz": 16.183524879516956,
+          "medianDifferenceCI95": [
+            0.43103199999999997,
+            0.46047950000000004
+          ],
+          "pValue": 9.99990000099999e-06,
+          "permutations": 100000,
+          "probabilityOfSuperiority": 1.0,
+          "endpointRole": "keşifsel"
+        },
+        "meanAdh": {
+          "n": 20,
+          "meanDifference": 0.0684311,
+          "medianDifference": 0.06667499999999998,
+          "sdDifference": 0.006844697316747818,
+          "minDifference": 0.05720900000000001,
+          "maxDifference": 0.08568800000000001,
+          "positive": 20,
+          "negative": 0,
+          "zero": 0,
+          "cohenDz": 9.997680954066537,
+          "medianDifferenceCI95": [
+            0.0655725,
+            0.07286100000000001
+          ],
+          "pValue": 1.999980000199998e-05,
+          "permutations": 100000,
+          "probabilityOfSuperiority": 1.0,
+          "endpointRole": "keşifsel"
+        },
+        "maxCluster": {
+          "n": 20,
+          "meanDifference": 42.05,
+          "medianDifference": 41.0,
+          "sdDifference": 10.379509165963283,
+          "minDifference": 23.0,
+          "maxDifference": 69.0,
+          "positive": 20,
+          "negative": 0,
+          "zero": 0,
+          "cohenDz": 4.051251299810138,
+          "medianDifferenceCI95": [
+            35.5,
+            47.0
+          ],
+          "pValue": 9.99990000099999e-06,
+          "permutations": 100000,
+          "probabilityOfSuperiority": 1.0,
+          "endpointRole": "keşifsel"
+        },
+        "meanCoop": {
+          "n": 20,
+          "meanDifference": 0.004214250000000008,
+          "medianDifference": 0.0037435000000000107,
+          "sdDifference": 0.00580905798935457,
+          "minDifference": -0.005765999999999993,
+          "maxDifference": 0.015176999999999996,
+          "positive": 15,
+          "negative": 5,
+          "zero": 0,
+          "cohenDz": 0.7254618576235358,
+          "medianDifferenceCI95": [
+            0.001040000000000041,
+            0.008465499999999987
+          ],
+          "pValue": 0.004699953000469995,
+          "permutations": 100000,
+          "probabilityOfSuperiority": 0.75,
+          "endpointRole": "keşifsel"
+        },
+        "somaFrac": {
+          "n": 20,
+          "meanDifference": 0.003046,
+          "medianDifference": 0.002984,
+          "sdDifference": 0.0009271954883864624,
+          "minDifference": 0.001343,
+          "maxDifference": 0.004855,
+          "positive": 20,
+          "negative": 0,
+          "zero": 0,
+          "cohenDz": 3.285175605524952,
+          "medianDifferenceCI95": [
+            0.002646,
+            0.0034855
+          ],
+          "pValue": 9.99990000099999e-06,
+          "permutations": 100000,
+          "probabilityOfSuperiority": 1.0,
+          "endpointRole": "keşifsel"
+        }
+      }
+    },
+    "predation-group": {
+      "label": "Güçlü baskı − Grup seçilimi",
+      "role": "exploratory",
+      "metrics": {
+        "mcFrac": {
+          "n": 20,
+          "meanDifference": -0.005312199999999984,
+          "medianDifference": -0.0024739999999999762,
+          "sdDifference": 0.021123107400988248,
+          "minDifference": -0.04313900000000004,
+          "maxDifference": 0.030201000000000033,
+          "positive": 10,
+          "negative": 10,
+          "zero": 0,
+          "cohenDz": -0.2514876196554041,
+          "medianDifferenceCI95": [
+            -0.020439499999999944,
+            0.010207999999999995
+          ],
+          "pValue": 0.2732472675273247,
+          "permutations": 100000,
+          "probabilityOfSuperiority": 0.5,
+          "endpointRole": "keşifsel"
+        },
+        "meanAdh": {
+          "n": 20,
+          "meanDifference": 0.004150900000000002,
+          "medianDifference": 0.003943499999999989,
+          "sdDifference": 0.004074674283398557,
+          "minDifference": -0.0017530000000000046,
+          "maxDifference": 0.012386000000000008,
+          "positive": 16,
+          "negative": 4,
+          "zero": 0,
+          "cohenDz": 1.0187071925999118,
+          "medianDifferenceCI95": [
+            0.000823499999999977,
+            0.007075500000000012
+          ],
+          "pValue": 0.00023999760002399976,
+          "permutations": 100000,
+          "probabilityOfSuperiority": 0.8,
+          "endpointRole": "keşifsel"
+        },
+        "maxCluster": {
+          "n": 20,
+          "meanDifference": 1.7,
+          "medianDifference": -1.0,
+          "sdDifference": 15.755032612837681,
+          "minDifference": -22.0,
+          "maxDifference": 33.0,
+          "positive": 10,
+          "negative": 10,
+          "zero": 0,
+          "cohenDz": 0.10790202989581806,
+          "medianDifferenceCI95": [
+            -8.0,
+            11.0
+          ],
+          "pValue": 0.6444035559644403,
+          "permutations": 100000,
+          "probabilityOfSuperiority": 0.5,
+          "endpointRole": "keşifsel"
+        },
+        "meanCoop": {
+          "n": 20,
+          "meanDifference": 0.0010503499999999916,
+          "medianDifference": 0.0011675000000000157,
+          "sdDifference": 0.003435711544705268,
+          "minDifference": -0.010375000000000023,
+          "maxDifference": 0.006403999999999965,
+          "positive": 14,
+          "negative": 6,
+          "zero": 0,
+          "cohenDz": 0.30571542061459517,
+          "medianDifferenceCI95": [
+            -9.499999999995623e-06,
+            0.0026984999999999926
+          ],
+          "pValue": 0.1934980650193498,
+          "permutations": 100000,
+          "probabilityOfSuperiority": 0.7,
+          "endpointRole": "keşifsel"
+        },
+        "somaFrac": {
+          "n": 20,
+          "meanDifference": 0.00080535,
+          "medianDifference": 0.0008310000000000001,
+          "sdDifference": 0.0008974844537577473,
+          "minDifference": -0.000669,
+          "maxDifference": 0.002832,
+          "positive": 15,
+          "negative": 5,
+          "zero": 0,
+          "cohenDz": 0.8973414487883523,
+          "medianDifferenceCI95": [
+            0.0002475,
+            0.001332
+          ],
+          "pValue": 0.0009299907000929991,
+          "permutations": 100000,
+          "probabilityOfSuperiority": 0.75,
+          "endpointRole": "keşifsel"
+        }
+      }
+    },
+    "mutation-group": {
+      "label": "Yüksek mutasyon − Grup seçilimi",
+      "role": "exploratory",
+      "metrics": {
+        "mcFrac": {
+          "n": 20,
+          "meanDifference": -0.07869295,
+          "medianDifference": -0.08168699999999995,
+          "sdDifference": 0.013540781056827838,
+          "minDifference": -0.10045800000000005,
+          "maxDifference": -0.049422999999999995,
+          "positive": 0,
+          "negative": 20,
+          "zero": 0,
+          "cohenDz": -5.811551761286301,
+          "medianDifferenceCI95": [
+            -0.08617350000000001,
+            -0.07095100000000004
+          ],
+          "pValue": 9.99990000099999e-06,
+          "permutations": 100000,
+          "probabilityOfSuperiority": 0.0,
+          "endpointRole": "keşifsel"
+        },
+        "meanAdh": {
+          "n": 20,
+          "meanDifference": -0.00855585,
+          "medianDifference": -0.008385000000000004,
+          "sdDifference": 0.003744134405974231,
+          "minDifference": -0.01464800000000005,
+          "maxDifference": -0.0019020000000000148,
+          "positive": 0,
+          "negative": 20,
+          "zero": 0,
+          "cohenDz": -2.2851343120450163,
+          "medianDifferenceCI95": [
+            -0.011270000000000002,
+            -0.006020499999999984
+          ],
+          "pValue": 9.99990000099999e-06,
+          "permutations": 100000,
+          "probabilityOfSuperiority": 0.0,
+          "endpointRole": "keşifsel"
+        },
+        "maxCluster": {
+          "n": 20,
+          "meanDifference": -11.95,
+          "medianDifference": -14.5,
+          "sdDifference": 16.178201708667,
+          "minDifference": -47.0,
+          "maxDifference": 25.0,
+          "positive": 4,
+          "negative": 16,
+          "zero": 0,
+          "cohenDz": -0.7386482264959111,
+          "medianDifferenceCI95": [
+            -17.5,
+            -8.5
+          ],
+          "pValue": 0.0037799622003779963,
+          "permutations": 100000,
+          "probabilityOfSuperiority": 0.2,
+          "endpointRole": "keşifsel"
+        },
+        "meanCoop": {
+          "n": 20,
+          "meanDifference": -0.0029823500000000004,
+          "medianDifference": -0.0033785000000000065,
+          "sdDifference": 0.005507443778770307,
+          "minDifference": -0.012924999999999964,
+          "maxDifference": 0.007317999999999991,
+          "positive": 6,
+          "negative": 14,
+          "zero": 0,
+          "cohenDz": -0.5415125636862869,
+          "medianDifferenceCI95": [
+            -0.00576299999999999,
+            0.00035649999999998183
+          ],
+          "pValue": 0.026899731002689973,
+          "permutations": 100000,
+          "probabilityOfSuperiority": 0.3,
+          "endpointRole": "keşifsel"
+        },
+        "somaFrac": {
+          "n": 20,
+          "meanDifference": 0.0023053,
+          "medianDifference": 0.0024085,
+          "sdDifference": 0.0009001692881721865,
+          "minDifference": 0.0007720000000000001,
+          "maxDifference": 0.004398999999999999,
+          "positive": 20,
+          "negative": 0,
+          "zero": 0,
+          "cohenDz": 2.56096273255552,
+          "medianDifferenceCI95": [
+            0.0019625,
+            0.0027095
+          ],
+          "pValue": 9.99990000099999e-06,
+          "permutations": 100000,
+          "probabilityOfSuperiority": 1.0,
+          "endpointRole": "keşifsel"
+        }
+      }
+    }
+  },
+  "descriptives": {
+    "control": {
+      "mcFrac": {
+        "n": 20,
+        "median": 0.1821735,
+        "q1": 0.17093425,
+        "q3": 0.19523625,
+        "min": 0.156757,
+        "max": 0.241881
+      },
+      "meanAdh": {
+        "n": 20,
+        "median": 0.232156,
+        "q1": 0.22892249999999997,
+        "q3": 0.23673774999999997,
+        "min": 0.224621,
+        "max": 0.242857
+      },
+      "maxCluster": {
+        "n": 20,
+        "median": 33.5,
+        "q1": 30.5,
+        "q3": 36.25,
+        "min": 24.0,
+        "max": 47.0
+      },
+      "somaFrac": {
+        "n": 20,
+        "median": 0.0004125,
+        "q1": 0.000212,
+        "q3": 0.00044500000000000003,
+        "min": 0.0,
+        "max": 0.000897
+      },
+      "verdicts": {
+        "collapsed": 20
+      }
+    },
+    "group": {
+      "mcFrac": {
+        "n": 20,
+        "median": 0.7030894999999999,
+        "q1": 0.69700825,
+        "q3": 0.72481225,
+        "min": 0.669391,
+        "max": 0.742233
+      },
+      "meanAdh": {
+        "n": 20,
+        "median": 0.30881400000000003,
+        "q1": 0.3061925,
+        "q3": 0.31208824999999996,
+        "min": 0.30228,
+        "max": 0.320417
+      },
+      "maxCluster": {
+        "n": 20,
+        "median": 87.0,
+        "q1": 78.25,
+        "q3": 95.75,
+        "min": 68.0,
+        "max": 112.0
+      },
+      "somaFrac": {
+        "n": 20,
+        "median": 0.0008370000000000001,
+        "q1": 0.000668,
+        "q3": 0.0012115,
+        "min": 0.000501,
+        "max": 0.002513
+      },
+      "verdicts": {
+        "established": 20
+      }
+    },
+    "predation": {
+      "mcFrac": {
+        "n": 20,
+        "median": 0.7053905,
+        "q1": 0.69433325,
+        "q3": 0.715542,
+        "min": 0.662221,
+        "max": 0.735147
+      },
+      "meanAdh": {
+        "n": 20,
+        "median": 0.314836,
+        "q1": 0.31059749999999997,
+        "q3": 0.3180055,
+        "min": 0.304517,
+        "max": 0.324628
+      },
+      "maxCluster": {
+        "n": 20,
+        "median": 90.5,
+        "q1": 83.75,
+        "q3": 96.25,
+        "min": 72.0,
+        "max": 111.0
+      },
+      "somaFrac": {
+        "n": 20,
+        "median": 0.001835,
+        "q1": 0.0015835,
+        "q3": 0.00204475,
+        "min": 0.000667,
+        "max": 0.003838
+      },
+      "verdicts": {
+        "established": 20
+      }
+    },
+    "mutation": {
+      "mcFrac": {
+        "n": 20,
+        "median": 0.627877,
+        "q1": 0.61991475,
+        "q3": 0.64255975,
+        "min": 0.588991,
+        "max": 0.676872
+      },
+      "meanAdh": {
+        "n": 20,
+        "median": 0.30135049999999997,
+        "q1": 0.29624425000000004,
+        "q3": 0.30601025,
+        "min": 0.29059,
+        "max": 0.311379
+      },
+      "maxCluster": {
+        "n": 20,
+        "median": 77.0,
+        "q1": 67.0,
+        "q3": 84.25,
+        "min": 61.0,
+        "max": 93.0
+      },
+      "somaFrac": {
+        "n": 20,
+        "median": 0.0034215,
+        "q1": 0.0027827499999999996,
+        "q3": 0.0038705,
+        "min": 0.001756,
+        "max": 0.005068
+      },
+      "verdicts": {
+        "established": 11,
+        "transition": 9
+      }
+    }
+  },
+  "thresholdSensitivity": {
+    "control": {
+      "base": {
+        "established": 0,
+        "n": 20
+      },
+      "strict": {
+        "established": 0,
+        "n": 20
+      },
+      "loose": {
+        "established": 0,
+        "n": 20
+      }
+    },
+    "group": {
+      "base": {
+        "established": 20,
+        "n": 20
+      },
+      "strict": {
+        "established": 0,
+        "n": 20
+      },
+      "loose": {
+        "established": 20,
+        "n": 20
+      }
+    },
+    "predation": {
+      "base": {
+        "established": 20,
+        "n": 20
+      },
+      "strict": {
+        "established": 0,
+        "n": 20
+      },
+      "loose": {
+        "established": 20,
+        "n": 20
+      }
+    },
+    "mutation": {
+      "base": {
+        "established": 11,
+        "n": 20
+      },
+      "strict": {
+        "established": 0,
+        "n": 20
+      },
+      "loose": {
+        "established": 20,
+        "n": 20
+      }
+    }
+  }
+}

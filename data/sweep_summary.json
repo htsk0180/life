@@ -1,0 +1,196 @@
+{
+  "modelVersion": "1.3.0",
+  "design": {
+    "levels": [
+      0.0,
+      0.25,
+      0.5,
+      0.75,
+      1.0
+    ],
+    "seeds": [
+      500000,
+      507919,
+      515838,
+      523757,
+      531676,
+      539595,
+      547514,
+      555433
+    ],
+    "nPerLevel": 8,
+    "seconds": 60.0,
+    "exploratory": true
+  },
+  "levels": {
+    "0.00": {
+      "n": 8,
+      "mcFrac": {
+        "median": 0.187448,
+        "q1": 0.1755595,
+        "q3": 0.20089625000000003
+      },
+      "meanAdh": {
+        "median": 0.23309649999999998,
+        "q1": 0.22876175,
+        "q3": 0.2370395
+      },
+      "maxCluster": {
+        "median": 33.0,
+        "q1": 30.5,
+        "q3": 36.25
+      },
+      "verdicts": {
+        "collapsed": 8
+      }
+    },
+    "0.25": {
+      "n": 8,
+      "mcFrac": {
+        "median": 0.38014950000000003,
+        "q1": 0.35895699999999997,
+        "q3": 0.39093725
+      },
+      "meanAdh": {
+        "median": 0.26124250000000004,
+        "q1": 0.25956825,
+        "q3": 0.262494
+      },
+      "maxCluster": {
+        "median": 46.0,
+        "q1": 43.5,
+        "q3": 54.25
+      },
+      "verdicts": {
+        "transition": 8
+      }
+    },
+    "0.50": {
+      "n": 8,
+      "mcFrac": {
+        "median": 0.5596639999999999,
+        "q1": 0.54956625,
+        "q3": 0.5649015
+      },
+      "meanAdh": {
+        "median": 0.288403,
+        "q1": 0.28582075,
+        "q3": 0.28934875000000004
+      },
+      "maxCluster": {
+        "median": 59.5,
+        "q1": 53.5,
+        "q3": 69.0
+      },
+      "verdicts": {
+        "transition": 8
+      }
+    },
+    "0.75": {
+      "n": 8,
+      "mcFrac": {
+        "median": 0.6763855000000001,
+        "q1": 0.66885075,
+        "q3": 0.6856512499999999
+      },
+      "meanAdh": {
+        "median": 0.3066245,
+        "q1": 0.30341799999999997,
+        "q3": 0.308029
+      },
+      "maxCluster": {
+        "median": 81.5,
+        "q1": 75.75,
+        "q3": 82.0
+      },
+      "verdicts": {
+        "established": 8
+      }
+    },
+    "1.00": {
+      "n": 8,
+      "mcFrac": {
+        "median": 0.7300545,
+        "q1": 0.72084825,
+        "q3": 0.7326135
+      },
+      "meanAdh": {
+        "median": 0.313479,
+        "q1": 0.31019225,
+        "q3": 0.31587125
+      },
+      "maxCluster": {
+        "median": 95.0,
+        "q1": 76.5,
+        "q3": 109.25
+      },
+      "verdicts": {
+        "established": 8
+      }
+    }
+  },
+  "pairedVsZero": {
+    "0.25": {
+      "n": 8,
+      "medianDifference": 0.1848255,
+      "meanDifference": 0.18247787499999998,
+      "minDifference": 0.147408,
+      "maxDifference": 0.21272499999999997,
+      "positive": 8,
+      "negative": 0,
+      "zero": 0,
+      "pExactSignFlip": 0.0078125
+    },
+    "0.50": {
+      "n": 8,
+      "medianDifference": 0.37325249999999993,
+      "meanDifference": 0.36356924999999995,
+      "minDifference": 0.305049,
+      "maxDifference": 0.3916069999999999,
+      "positive": 8,
+      "negative": 0,
+      "zero": 0,
+      "pExactSignFlip": 0.0078125
+    },
+    "0.75": {
+      "n": 8,
+      "medianDifference": 0.491452,
+      "meanDifference": 0.482351125,
+      "minDifference": 0.437489,
+      "maxDifference": 0.507629,
+      "positive": 8,
+      "negative": 0,
+      "zero": 0,
+      "pExactSignFlip": 0.0078125
+    },
+    "1.00": {
+      "n": 8,
+      "medianDifference": 0.5394559999999999,
+      "meanDifference": 0.535099,
+      "minDifference": 0.48931800000000003,
+      "maxDifference": 0.568792,
+      "positive": 8,
+      "negative": 0,
+      "zero": 0,
+      "pExactSignFlip": 0.0078125
+    }
+  },
+  "withinSeedSlope": {
+    "n": 8,
+    "medianDifference": 0.5506797999999999,
+    "meanDifference": 0.5480285,
+    "minDifference": 0.5087952,
+    "maxDifference": 0.585032,
+    "positive": 8,
+    "negative": 0,
+    "zero": 0,
+    "pExactSignFlip": 0.0078125
+  },
+  "withinSeedSpearman": {
+    "median": 0.9999999999999998,
+    "min": 0.9999999999999998,
+    "max": 0.9999999999999998,
+    "positive": 8,
+    "n": 8
+  }
+}

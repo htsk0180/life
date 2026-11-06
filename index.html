@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Rastgele mutasyon ve çok düzeyli doğal seçilim altında çok hücreliliğin evrimini simüle eden WebGL laboratuvarı.">
+  <title>ORIGIN — Çok Hücreliliğin Evrimi</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23071014'/%3E%3Cpath d='M16 5l9 11-9 11-9-11z' fill='none' stroke='%235ff0c0' stroke-width='2'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark">◈</div>
+        <div class="brand-text">
+          <h1>ORIGIN <span>LAB</span></h1>
+          <p>Çok hücreliliğin evrimi · çok düzeyli seçilim simülatörü</p>
+        </div>
+      </div>
+      <div class="topstats">
+        <div class="topstat"><span>NESİL</span><b id="stat-gen">0</b></div>
+        <div class="topstat"><span>SÜRE</span><b id="stat-time">00:00</b></div>
+        <div class="topstat"><span>HÜCRE</span><b id="stat-pop">0</b></div>
+        <div class="topstat"><span>FPS</span><b id="stat-fps">—</b></div>
+        <div class="seed-chip">TOHUM <b id="stat-seed">—</b></div>
+      </div>
+    </header>
+
+    <aside class="panel left-panel">
+      <div class="panel-head">
+        <span class="eyebrow">DENEYSEL KONTROL</span>
+        <h2>Seçilim rejimi</h2>
+        <p class="panel-sub">Tek değişken: seçilimin hangi düzeyde işlediği.</p>
+      </div>
+
+      <div class="preset-grid" id="presets">
+        <button class="preset" data-preset="control">
+          <b>Kontrol</b><span>Bireysel seçilim</span>
+        </button>
+        <button class="preset active" data-preset="group">
+          <b>Grup seçilimi</b><span>Çok düzeyli</span>
+        </button>
+        <button class="preset" data-preset="predation">
+          <b>Güçlü baskı</b><span>Predasyon benzeri</span>
+        </button>
+        <button class="preset" data-preset="mutation">
+          <b>Yüksek mutasyon</b><span>Grup seçilimi 0.75</span>
+        </button>
+      </div>
+
+      <div class="controls">
+        <div class="control">
+          <div class="control-label"><span>Mutasyon oranı</span><b id="val-mutation">0.050</b></div>
+          <input type="range" id="mutation" min="0" max="0.15" step="0.005" value="0.05">
+          <p>Gen başına, bölünme başına.</p>
+        </div>
+        <div class="control">
+          <div class="control-label"><span>Grup seçilimi</span><b id="val-group">0.90</b></div>
+          <input type="range" id="group" min="0" max="1" step="0.05" value="0.9">
+          <p>Her 5 sn'de bir uygulanan seçilim darbesinin gücü.</p>
+        </div>
+        <div class="control">
+          <div class="control-label"><span>Besin arzı</span><b id="val-nutrient">1.00</b></div>
+          <input type="range" id="nutrient" min="0.3" max="1.6" step="0.05" value="1">
+          <p>Kaynağın yenilenme hızı.</p>
+        </div>
+        <div class="control">
+          <div class="control-label"><span>Yapışma maliyeti</span><b id="val-adh">0.15</b></div>
+          <input type="range" id="adh" min="0" max="0.3" step="0.01" value="0.15">
+          <p>Yapışkan hücrelerin saniyelik enerji yükü.</p>
+        </div>
+      </div>
+
+      <div class="transport">
+        <button id="play" class="primary">Duraklat</button>
+        <button id="reset" class="ghost">Sıfırla</button>
+      </div>
+
+      <div class="speed-row">
+        <span>HIZ</span>
+        <div class="segmented" id="speed">
+          <button data-speed="1">1×</button>
+          <button data-speed="2" class="active">2×</button>
+          <button data-speed="4">4×</button>
+        </div>
+      </div>
+
+      <button id="new-seed" class="ghost wide">Yeni tohum</button>
+      <button id="copy-report" class="ghost wide">Deney raporunu kopyala</button>
+      <button id="download-csv" class="ghost wide">CSV indir</button>
+      <p class="footnote">Preset seçimi deneyi sıfırlar. Kaydırıcılar canlı uygulanır. Model <span data-model-version>v—</span>.</p>
+    </aside>
+
+    <main class="stage" id="stage">
+      <canvas id="world"></canvas>
+
+      <div class="hud hud-tl">
+        <div class="hud-chip"><span>CANLI</span><b id="hud-pop">0</b></div>
+        <div class="hud-chip accent"><span>ÇOK HÜCRELİ</span><b id="hud-mc">0%</b></div>
+      </div>
+
+      <div class="hud hud-tr">
+        <span class="hud-label">RENK</span>
+        <div class="color-modes" id="color-modes">
+          <button data-mode="lineage" class="active">Soy</button>
+          <button data-mode="cooperation">İşbirliği</button>
+          <button data-mode="adhesion">Yapışma</button>
+          <button data-mode="soma">Soma</button>
+        </div>
+      </div>
+
+      <div class="hud hud-bl">
+        <div class="ramp" id="ramp"></div>
+        <span id="ramp-label">Soy rengi</span>
+      </div>
+
+      <div class="hud hud-br">
+        <span>Sürükle: gezin · Tekerlek: yakınlaş · Çift tık: sıfırla</span>
+      </div>
+
+      <div class="tooltip" id="tooltip"></div>
+      <div class="webgl-error" id="webgl-error" hidden></div>
+    </main>
+
+    <aside class="panel right-panel">
+      <section class="verdict" id="verdict" data-status="running">
+        <div class="verdict-head">
+          <span class="eyebrow">MODEL DEĞERLENDİRMESİ</span>
+          <span class="verdict-time" id="verdict-time">—</span>
+        </div>
+        <h2 id="verdict-title">Gözlem sürüyor</h2>
+        <p id="verdict-text">Seçilim rejimi uygulanıyor. Değerlendirme, önceden tanımlı eşikler ve en az 55 saniyelik simülasyon süresi gerektirir.</p>
+        <div class="meter"><i id="verdict-meter"></i></div>
+        <div class="verdict-foot" id="verdict-foot">—</div>
+        <details class="criteria" id="criteria">
+          <summary>Değerlendirme ölçütleri · <span data-model-version>v—</span></summary>
+          <ul>
+            <li><b>Basit çok hücrelilik kuruldu:</b> çok hücreli oran &gt; <span data-th="est-mc">—</span>, ortalama yapışma &gt; <span data-th="est-adh">—</span>, en büyük küme ≥ <span data-th="est-cluster">—</span> hücre.</li>
+            <li><b>Kümeleşme çöktü:</b> oran &lt; <span data-th="col-mc">—</span> ve ortalama yapışma &lt; <span data-th="col-adh">—</span>.</li>
+            <li><b>Geriliyor:</b> son <span data-th="decline-window">—</span> sn'de oran <span data-th="decline-delta">—</span> puandan fazla düştüyse.</li>
+            <li>Değerlendirme <span data-th="min-time">—</span> sn sonra; popülasyon &lt; <span data-th="min-pop">—</span> ise tükendi. Çok hücreli eşiği ≥ <span data-th="mc-size">—</span> hücre.</li>
+          </ul>
+          <p>Eşikler model tasarımıdır, biyolojik yasa değildir. 60 sn ≈ 3 ortalama nesil (maksimum soy 8–11 nesil). Tek koşu sonucu; replikasyon ve tam sınırlar README'de.</p>
+        </details>
+      </section>
+
+      <div class="metric-grid">
+        <div class="metric"><span>Çok hücreli oran</span><b id="m-mc">0%</b></div>
+        <div class="metric"><span>Ort. küme</span><b id="m-cluster">0.0</b></div>
+        <div class="metric"><span>En büyük küme</span><b id="m-max">0</b></div>
+        <div class="metric"><span>Küme sayısı</span><b id="m-clusters">0</b></div>
+        <div class="metric"><span>Yapışma geni</span><b id="m-adh">0.00</b></div>
+        <div class="metric"><span>İşbirliği geni</span><b id="m-coop">0.00</b></div>
+        <div class="metric"><span>Somatik hücre</span><b id="m-soma">0%</b></div>
+        <div class="metric"><span>Ort. nesil</span><b id="m-gen">0.0</b></div>
+      </div>
+
+      <div class="card chart-card">
+        <div class="card-head"><h3>Popülasyon ve çok hücrelilik</h3><span>son 3 dk</span></div>
+        <canvas id="chart-pop"></canvas>
+      </div>
+
+      <div class="card chart-card">
+        <div class="card-head"><h3>Gen frekansları</h3><span>0 → 1</span></div>
+        <canvas id="chart-genes"></canvas>
+      </div>
+
+      <div class="card chart-card">
+        <div class="card-head"><h3>Küme boyutu</h3><span>küme sayısı</span></div>
+        <canvas id="chart-hist"></canvas>
+      </div>
+
+      <div class="card log-card">
+        <div class="card-head"><h3>Olay günlüğü</h3><span id="log-count">0 olay</span></div>
+        <div class="log" id="log"></div>
+      </div>
+    </aside>
+  </div>
+
+  <section class="science">
+    <div class="science-inner">
+      <div class="science-head">
+        <span class="eyebrow">BİLİMSEL TEMEL</span>
+        <h2>Model neyi test ediyor?</h2>
+        <p>Bu laboratuvar, tek hücreli atalardan çok hücreli yaşamın evrimleşip evrimleşemeyeceğini birey tabanlı bir modelde test eder. Hücreler üç kalıtsal özellik taşır: yapışma, işbirliği ve somatik kader. Mutasyon her bölünmede rastgeledir; seçilim ise iki düzeyde işleyebilir.</p>
+        <p class="model-meta">Model <span data-model-version>v—</span> · Eşleştirilmiş replikasyon: 20 tohum × 4 rejim (README) · 60 sn ≈ 3 ortalama nesil (maks. 8–11)</p>
+      </div>
+
+      <div class="science-grid">
+        <article class="science-card">
+          <span class="num">01</span>
+          <h3>Rastgele mutasyon</h3>
+          <p>Her gen, bölünme başına ayarlanabilir bir olasılıkla Gaussian sapma biriktirir. Modelde yön veren bir tasarım yoktur; varyasyon tamamen rastgeledir.</p>
+        </article>
+        <article class="science-card">
+          <span class="num">02</span>
+          <h3>Çok düzeyli seçilim</h3>
+          <p>Her 5 saniyede bir “seçilim darbesi” uygulanır: ≥8 hücreli, kohezif ve işbirlikçi kümeler enerji kazanır; tek hücreler ve küçük kümeler predasyonla elenir. Bu, Ratcliff ve arkadaşlarının çöktürme seçilimi ile Boraas ve Herron'un predasyon deneylerinin kabaca soyutlamasıdır.</p>
+        </article>
+        <article class="science-card">
+          <span class="num">03</span>
+          <h3>İşbölümü ve bedavacılık</h3>
+          <p>İşbirliği enerji paylaşımıdır; maliyetlidir. Somatik hücreler bölünmeyi bırakıp kümeye yatırım yapar. Ancak bu modelde soma tek eşikli ve zayıf bir grup yararına sahiptir; bu nedenle karmaşık işbölümü ayrı bir test gerektirir.</p>
+        </article>
+      </div>
+
+      <div class="result-block">
+        <div class="result-mark">≠</div>
+        <div>
+          <span class="eyebrow">MODEL SONUCU</span>
+          <h3>Bu modelde rastgelelik tek başına yetmedi; seçilim düzeyi belirleyici oldu.</h3>
+          <p>Kontrol rejiminde yapışma geni ve küme oranı düşer: bireysel seçilim, kümeleşmenin maliyetini cezalandırır. Grup seçilimi açıldığında aynı rastgele mutasyon havuzundan, aynı soy içinde bağlı büyük hücre kümeleri ortaya çıkar. Bu, grup seçiliminin genel olarak zorunlu olduğunu değil, <b>bu modelde ve test edilen parametre aralığında</b> kümeleşmeyi desteklediğini gösterir. Karmaşık işbölümü ayrı bir problemdir.</p>
+        </div>
+      </div>
+
+      <div class="science-cols">
+        <div>
+          <h3>Model varsayımları</h3>
+          <ul class="assumptions">
+            <li>2B toroidal dünya; hücreler yapışma geni eşiğini aşınca bağ kurar.</li>
+            <li>Enerji, uzamsal besin alanından alınır; ölüm ve bölünme enerjiye bağlıdır.</li>
+            <li>Seçilim darbesi; küme boyutu, ortalama yapışma ve işbirliğini birlikte ödüllendirir. Sonuç kısmen bu tasarımın doğal bir sonucudur.</li>
+            <li>Somatik kader geri dönüşsüzdür: soma hücresi bir daha bölünmez.</li>
+            <li>Bağlar yalnızca aynı soy içinde kurulur; bedavacılık olduğundan az temsil edilir.</li>
+            <li>Başlangıç popülasyonu yapışma/işbirliği varyasyonu taşır; de novo gen kökeni test edilmez.</li>
+            <li>60 sn ≈ 3 ortalama nesil (maksimum soy 8–11); model bir kanıt değil, mekanizma deneyidir.</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Literatür</h3>
+          <ol class="refs">
+            <li>Ratcliff, W. C. et al. (2012). Experimental evolution of multicellularity. <i>PNAS</i> 109, 1595–1600. <a href="https://doi.org/10.1073/pnas.1115323109" target="_blank" rel="noopener">doi</a></li>
+            <li>Herron, M. D. et al. (2019). De novo origins of multicellularity in response to predation. <i>Scientific Reports</i> 9, 2328. <a href="https://doi.org/10.1038/s41598-019-39558-8" target="_blank" rel="noopener">doi</a></li>
+            <li>Boraas, M. E., Seale, D. B. &amp; Boxhorn, J. E. (1998). Phagotrophy by a flagellate selects for colonial prey: a possible origin of multicellularity. <i>Evolutionary Ecology</i> 12, 153–164. <a href="https://doi.org/10.1023/A:1006527528063" target="_blank" rel="noopener">doi</a></li>
+            <li>Hammerschmidt, K. et al. (2014). Life cycles, fitness decoupling and the evolution of multicellularity. <i>Nature</i> 515, 75–79. <a href="https://doi.org/10.1038/nature13884" target="_blank" rel="noopener">doi</a></li>
+            <li>Colizzi, E. S., Vroomans, R. M. A. &amp; Merks, R. M. H. (2020). Evolution of multicellularity by collective integration of spatial information. <i>eLife</i> 9, e56349. <a href="https://doi.org/10.7554/eLife.56349" target="_blank" rel="noopener">doi</a></li>
+            <li>Grosberg, R. K. &amp; Strathmann, R. R. (2007). The evolution of multicellularity: a minor major transition? <i>Annu. Rev. Ecol. Evol. Syst.</i> 38, 621–654. <a href="https://doi.org/10.1146/annurev.ecolsys.36.102403.114735" target="_blank" rel="noopener">doi</a></li>
+            <li>Szathmáry, E. &amp; Smith, J. M. (1995). The major evolutionary transitions. <i>Nature</i> 374, 227–232. <a href="https://doi.org/10.1038/374227a0" target="_blank" rel="noopener">doi</a></li>
+          </ol>
+        </div>
+      </div>
+
+      <p class="disclaimer">Model <span data-model-version>v—</span>. Bu bir araştırma aracı prototipidir. Parametreler ampirik sistemlerden esinlenmiştir ancak model, gerçek biyolojinin tüm ayrıntılarını içermez. Değerlendirme eşikleri önceden tanımlıdır ve biyolojik yasa değildir. Tek koşu sonucu popülasyon düzeyinde kanıt sayılmaz; çok tohumlu replikasyon ve tam varsayım listesi için <a href="README.md">README</a>.</p>
+    </div>
+  </section>
+
+  <script src="js/config.js"></script>
+  <script src="js/rng.js"></script>
+  <script src="js/nutrient.js"></script>
+  <script src="js/simulation.js"></script>
+  <script src="js/renderer.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/main.js"></script>
+  <script src="scripts/replicate.js"></script>
+</body>
+</html>
